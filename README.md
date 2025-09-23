@@ -1,29 +1,43 @@
 # WebCal
 
-A very simple, client-side-only CalDAV-compatible calendar UI built with React, Vite, and Tailwind CSS.
+A very simple CalDAV and iCal compatible calendar application.
 
 ## Features
 
-- **CalDAV support:** Connect to and display events from any CalDAV server.
+- **CalDAV support:** Display events from any CalDAV server.
+- **iCal support:** Display events from aniCal feed.  
 - **Multiple calendars:** Add, edit, enable/disable, and color-code multiple calendars.
-- **Modern UI:** Responsive, clean interface using FullCalendar and Tailwind CSS.
 - **Views:** Month, week, day, and agenda (list) views.
 - **Event management:** Create, edit, and delete events (if your CalDAV server supports it).
 - **Import/Export:** Import/export calendar configurations as JSON.
-- **No required backend:** All logic runs in the browser; your credentials are never sent to a third-party server.
+- **No required backend:** Runs in the browser; your credentials are never sent to a third-party server.
+- **Built-in Proxy:** Built in proxy server to work around CORS issues.
 
-## Getting Started
+## Usage
 
-### Prerequisites
+Run as a docker container:
 
-- Node.js (v18 or newer recommended)
-- npm
+```
+docker run -p 8080:8080 rhyst/webcal
+```
 
-### Development
+Navigate to `localhost:8080` to see the interface. All information is stored in the browser. When adding CalDav or iCal calendars you can optionally use the built in proxy. This is actually required for most calendar providers as the CORS settings are often quite restrictive. The proxy is built into the container so even in this case nothing is sent via a third party.
+
+## Why
+
+I want a calendar interface that supports the main open standards (caldav/ical). I don't want it to be tightly coupled to other applications. I don't want the UI to look completely ancient. For some reason this did not seem to exist so I have created this.
+
+## Caveat
+
+My experience suggests that CalDav and iCal implementations are rife with non standard behaviour so I will not pretend this is a completely comprehensive solution. It will probably not work for some providers and there are likely many cases that display/editing/creating of events will not work.
+
+## Development
+
+### Local Development
 
 ```bash
 npm install
-npm run proxy
+npm run proxy # Optional
 npm run dev
 ```
 
@@ -40,8 +54,6 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 ### Docker
 
-Build and run a production container using Caddy to serve the static files:
-
 ```bash
 docker build -t webcal .
 docker run -p 8080:80 webcal
@@ -49,34 +61,6 @@ docker run -p 8080:80 webcal
 
 Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
-## Usage
+## Thanks
 
-1. **Add a CalDAV calendar:** Click "Add Calendar" and enter your CalDAV server URL, username, and password.
-2. **Enable/disable calendars:** Use the sidebar or calendar modal to toggle visibility.
-3. **Switch views:** Use the toolbar to switch between month, week, day, and agenda views.
-4. **Manage events:** Click on a date to add an event, or click an event to edit/delete it.
-5. **Import/Export:** Use the sidebar buttons to save or load your calendar configuration.
-
-## Security & Privacy
-
-- All operations are performed in your browser.
-- Credentials are stored in localStorage and only sent directly to your CalDAV server.
-- No data is sent to any third-party server.
-
-## Limitations
-
-- No server-side storage; all data is stored in the browser.
-- No push notifications or background sync.
-
-## CORS Proxy
-
-WebCal includes a built-in CORS proxy for accessing remote calendar resources that do not send CORS headers. This proxy is available at the `/proxy` subpath of your deployed app.
-
-- To enable the proxy for a calendar, simply check the "Use Proxy" option when creating or editing a calendar in the modal.
-- When enabled, all requests for that calendar (CalDAV or ICS) will be routed through the proxy, allowing you to bypass CORS restrictions.
-- The proxy is served by the same Node.js server as the static app, so no additional setup is required.
-
-**Example:**
-
-- If your app is running at `https://yourdomain.com`, the proxy endpoint is `https://yourdomain.com/proxy/<remote-url>`.
-- The app will automatically use this endpoint for any calendar with the "Use Proxy" option enabled.
+Thanks to [Full Calendar](https://fullcalendar.io/) which is basically the entire UI of this application.
