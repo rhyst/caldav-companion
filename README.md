@@ -27,10 +27,6 @@ Navigate to `localhost:8080` to see the interface. All information is stored in 
 
 I want a calendar interface that supports the main open standards (caldav/ical). I don't want it to be tightly coupled to other applications. I don't want the UI to look completely ancient. For some reason this did not seem to exist so I have created this.
 
-## Caveat
-
-My experience suggests that CalDav and iCal implementations are rife with non standard behaviour so I will not pretend this is a completely comprehensive solution. It will probably not work for some providers and there are likely many cases that display/editing/creating of events will not work.
-
 ## Development
 
 ### Local Development
@@ -64,3 +60,7 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 ## Thanks
 
 Thanks to [Full Calendar](https://fullcalendar.io/) which is basically the entire UI of this application.
+
+## Disclaimer
+
+My experience suggests that CalDav and iCal implementations are rife with non standard behaviour so I will not pretend this is a completely comprehensive solution. It will probably not work for some providers and there are likely many cases that display/editing/creating of events will not work.
