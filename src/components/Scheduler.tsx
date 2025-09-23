@@ -16,7 +16,7 @@ interface SchedulerProps {
 }
 
 const scheduler = tv({
-  base: "bg-white dark:bg-gray-800 rounded-lg",
+  base: "rounded-lg",
 });
 
 const input = tv({

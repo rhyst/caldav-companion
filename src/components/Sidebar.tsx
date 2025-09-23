@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
-      className="h-screen border-r border-[#e0e0e0] dark:border-gray-700 flex flex-col gap-4 p-2 relative bg-white dark:bg-gray-900"
+      className="h-screen border-r border-[#e0e0e0] dark:border-gray-400 flex flex-col gap-4 p-2 relative bg-white dark:bg-neutral-800"
       style={{ width, minWidth: 200, maxWidth: 600 }}
       {...props}
     >

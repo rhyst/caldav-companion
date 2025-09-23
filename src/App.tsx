@@ -5,6 +5,7 @@ import EventModal from "./components/EventModal";
 import Calendar from "./components/Calendar";
 import { useCalendarStore } from "./stores/calendarStore";
 import { useModalStore } from "./stores/modalStore";
+import type { CalendarEvent } from "./types";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -59,7 +60,7 @@ function App() {
     openCalendarModal(true, calendar);
   };
 
-  const handleEventSave = async (event: any) => {
+  const handleEventSave = async (event: CalendarEvent) => {
     try {
       await saveEvent(event, eventModal.isEdit, eventModal.event);
       closeEventModal();
@@ -69,7 +70,7 @@ function App() {
     }
   };
 
-  const handleEventDelete = async (event: any) => {
+  const handleEventDelete = async (event: CalendarEvent) => {
     try {
       await deleteEvent(event);
       closeEventModal();
@@ -80,7 +81,7 @@ function App() {
   };
 
   return (
-    <main className="h-screen w-screen flex bg-white dark:bg-neutral-900">
+    <main className="h-screen w-screen flex bg-white dark:bg-neutral-800">
       <Sidebar
         isDark={darkMode}
         width={sidebarWidth}
@@ -89,7 +90,7 @@ function App() {
         onClickDarkMode={(dark) => setDarkMode(dark)}
         onWidthChange={setSidebarWidth}
       />
-      <Calendar className="flex flex-1 h-screen" />
+      <Calendar className="flex flex-1 h-screen " />
 
       {/* Calendar Modal */}
       {calendarModal.open && (

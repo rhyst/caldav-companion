@@ -16,15 +16,11 @@
 }
 
 /* FullCalendar text consistency */
-.fc,
-.fc .fc-event-title,
-.fc .fc-toolbar-title,
-.fc .fc-col-header-cell-cushion,
-.fc .fc-daygrid-day-number {
-  @apply font-sans text-gray-700 font-normal;
+.fc {
+  @apply font-sans;
 }
 .fc .fc-toolbar-title {
-  @apply font-semibold text-blue-700 text-xl;
+  @apply font-sans font-semibold text-xl text-neutral-800;
 }
 
 /* FullCalendar button consistency */
@@ -32,13 +28,69 @@
 .fc .fc-button-primary {
   @apply bg-blue-700 text-white font-medium rounded transition border-none shadow-none;
 }
+.dark .fc .fc-button,
+.dark .fc .fc-button-primary {
+  @apply bg-blue-800;
+}
 .fc .fc-button:hover,
 .fc .fc-button-primary:hover {
   @apply bg-blue-800;
 }
+.dark .fc .fc-button:hover,
+.dark .fc .fc-button-primary:hover {
+  @apply bg-blue-700;
+}
 .fc .fc-button:focus,
 .fc .fc-button-primary:focus {
   @apply ring-2 ring-blue-300 outline-none;
+}
+.fc .fc-button:active,
+.fc .fc-button-primary:active {
+  @apply bg-blue-900;
+}
+.dark .fc .fc-button:active,
+.dark .fc .fc-button-primary:active {
+  @apply bg-blue-600;
+}
+.fc .fc-button:disabled,
+.fc .fc-button-primary:disabled {
+  @apply bg-gray-300 text-gray-500 cursor-not-allowed;
+}
+.dark .fc .fc-button:disabled,
+.dark .fc .fc-button-primary:disabled {
+  @apply bg-gray-600 text-gray-400;
+}
+
+/* FullCalendar text styles - Light mode */
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number,
+.fc .fc-timegrid-slot-label,
+.fc .fc-timegrid-axis,
+.fc .fc-list-day-cushion,
+.fc .fc-list-event-time,
+.fc .fc-list-event-title,
+.fc .fc-daygrid-dot-event .fc-event-title,
+.fc .fc-daygrid-dot-event .fc-event-time,
+.fc .fc-event-title {
+  @apply font-sans text-gray-700 font-normal;
+}
+
+/* FullCalendar text styles - Dark mode */
+.dark .fc .fc-toolbar-title {
+  @apply text-gray-200;
+}
+.dark .fc .fc-col-header-cell-cushion,
+.dark .fc .fc-daygrid-day-number,
+.dark .fc .fc-timegrid-slot-label,
+.dark .fc .fc-timegrid-axis,
+.dark .fc .fc-list-event-time,
+.dark .fc .fc-list-event-title,
+.dark .fc .fc-daygrid-dot-event .fc-event-title,
+.dark .fc .fc-daygrid-dot-event .fc-event-time {
+  @apply text-gray-200;
+}
+.dark .fc .fc-list-day-cushion {
+  @apply text-gray-200 bg-neutral-900;
 }
 
 :root {
