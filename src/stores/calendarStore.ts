@@ -12,8 +12,6 @@ import type { DAVObject } from "tsdav";
 import ICAL from "ical.js.2";
 import type { Calendar, CalendarEvent } from "../types";
 import { proxyUrl, unmangleProxiedUrl } from "../utils";
-import { RRule } from "rrule";
-import { parseISO } from "date-fns";
 
 // New events structure: organized by calendar UID then event UID
 interface EventsByCalendar {
@@ -177,17 +175,15 @@ export const useCalendarStore = create<CalendarState>()(
                 if (!vevent) {
                   return;
                 }
-                const dtstart = vevent.getFirstPropertyValue("dtstart");
+                const icalEvent = new ICAL.Event(vevent);
                 const recur = vevent.getFirstPropertyValue("rrule") as
                   | ICAL.Recur
                   | undefined;
                 let rrule: string | undefined;
                 if (recur) {
-                  const rruleObj = RRule.fromString(recur.toString()).options;
-                  rruleObj.dtstart = parseISO(dtstart?.toString() || "");
-                  rrule = new RRule(rruleObj).toString();
+                  const dtstart = icalEvent.startDate.toString().replace(/-/g, '');
+                  rrule = `DTSTART:${dtstart}\nRRULE:${recur.toString()}`;
                 }
-                const icalEvent = new ICAL.Event(vevent);
                 set((state) => {
                   if (!state.events[cal.uid]) {
                     state.events[cal.uid] = {};
@@ -215,10 +211,10 @@ export const useCalendarStore = create<CalendarState>()(
               }
             });
           }
-        } catch (e: any) {
+        } catch (e) {
           console.log(e);
           set((state) => {
-            state.error = e.message || "Failed to fetch events";
+            state.error = e instanceof Error ? e.message : "Failed to fetch events";
           });
         } finally {
           set((state) => {
@@ -310,9 +306,9 @@ export const useCalendarStore = create<CalendarState>()(
 
           // Refetch events
           await fetchEvents();
-        } catch (e: any) {
+        } catch (e) {
           set((state) => {
-            state.error = e.message || "Failed to save event";
+            state.error = e instanceof Error ? e.message : "Failed to save event";
           });
           throw e;
         } finally {
@@ -351,9 +347,9 @@ export const useCalendarStore = create<CalendarState>()(
 
           // Refetch events
           await fetchEvents();
-        } catch (e: any) {
+        } catch (e) {
           set((state) => {
-            state.error = e.message || "Failed to delete event";
+            state.error = e instanceof Error ? e.message : "Failed to delete event";
           });
           throw e;
         } finally {
