@@ -10,7 +10,7 @@ A very simple, client-side-only CalDAV-compatible calendar UI built with React, 
 - **Views:** Month, week, day, and agenda (list) views.
 - **Event management:** Create, edit, and delete events (if your CalDAV server supports it).
 - **Import/Export:** Import/export calendar configurations as JSON.
-- **No backend:** All logic runs in the browser; your credentials are never sent to a third-party server.
+- **No required backend:** All logic runs in the browser; your credentials are never sent to a third-party server.
 
 ## Getting Started
 
@@ -23,6 +23,7 @@ A very simple, client-side-only CalDAV-compatible calendar UI built with React, 
 
 ```bash
 npm install
+npm run proxy
 npm run dev
 ```
 
@@ -64,7 +65,7 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Limitations
 
-- No server-side component; all data is stored in the browser.
+- No server-side storage; all data is stored in the browser.
 - No push notifications or background sync.
 
 ## CORS Proxy
