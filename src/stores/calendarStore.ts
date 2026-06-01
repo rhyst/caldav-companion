@@ -252,7 +252,7 @@ export const useCalendarStore = create<CalendarState>()(
             "dtstamp",
             ICAL.Time.fromJSDate(new Date()),
           );
-          veventComp.addPropertyWithValue("prodid", "webcal");
+          veventComp.addPropertyWithValue("prodid", "caldav-companion");
           // Create ICALEvent
           const ICALEvent = new ICAL.Event(veventComp);
           ICALEvent.uid = uid;

@@ -1,4 +1,4 @@
-# WebCal
+# CalDAV Companion
 
 A very simple CalDAV and iCal compatible calendar application.
 
@@ -18,7 +18,7 @@ A very simple CalDAV and iCal compatible calendar application.
 Run as a docker container:
 
 ```
-docker run -p 8080:8080 rhyst/webcal
+docker run -p 8080:8080 rhyst/caldav-companion
 ```
 
 Navigate to `localhost:8080` to see the interface. All information is stored in the browser. When adding CalDav or iCal calendars you can optionally use the built in proxy. This is actually required for most calendar providers as the CORS settings are often quite restrictive. The proxy is built into the container so even in this case nothing is sent via a third party.
@@ -51,8 +51,8 @@ Visit [http://localhost:8080](http://localhost:8080) in your browser.
 ### Docker
 
 ```bash
-docker build -t webcal .
-docker run -p 8080:80 webcal
+docker build -t caldav-companion .
+docker run -p 8080:80 caldav-companion
 ```
 
 Visit [http://localhost:8080](http://localhost:8080) in your browser.

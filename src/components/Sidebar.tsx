@@ -63,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           color="blue"
           className="m-0 p-0"
         >
-          WebCal
+          CalDAV Companion
         </Text>
         <div className="flex items-center gap-2">
           {loading && (
