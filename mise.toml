@@ -1,0 +1,55 @@
+# Tooling and tasks for caldav-companion.
+#   mise install   provisions the pinned toolchain
+#   mise tasks      lists everything below
+#   mise run dev    starts the app
+
+[tools]
+# Match the Dockerfile (node:24-alpine).
+node = "24"
+
+[env]
+# Load the committed dev defaults (VITE_PROXY_URL, etc.) for every task.
+_.file = ".env"
+
+[tasks.install]
+description = "Install npm dependencies from package-lock.json"
+run = "npm install"
+
+[tasks.dev]
+description = "Run the Vite dev server on :8080 with hot reload"
+depends = ["install"]
+run = "npm run dev"
+
+[tasks.proxy]
+description = "Run the built-in CORS proxy on :8081 (optional; needed for most providers)"
+depends = ["install"]
+run = "npm run proxy"
+
+[tasks.build]
+description = "Type-check and build the production bundle into dist/"
+depends = ["install"]
+run = "npm run build"
+
+[tasks.preview]
+description = "Serve the production build on :8080"
+depends = ["build"]
+run = "npm run preview"
+
+[tasks.lint]
+description = "Lint the codebase with ESLint"
+depends = ["install"]
+run = "npm run lint"
+
+[tasks.format]
+description = "Format the codebase with Prettier"
+depends = ["install"]
+run = "npm run format"
+
+[tasks.docker-build]
+description = "Build the container image"
+run = "docker build -t rhyst/caldav-companion:latest ."
+
+[tasks.docker-push]
+description = "Push the container image to Docker Hub"
+depends = ["docker-build"]
+run = "docker push rhyst/caldav-companion:latest"
