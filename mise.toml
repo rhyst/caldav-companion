@@ -45,11 +45,11 @@ description = "Format the codebase with Prettier"
 depends = ["install"]
 run = "npm run format"
 
-[tasks.docker-build]
+[tasks."image:build"]
 description = "Build the container image"
 run = "docker build -t rhyst/caldav-companion:latest ."
 
-[tasks.docker-push]
+[tasks."image:push"]
 description = "Push the container image to Docker Hub"
-depends = ["docker-build"]
+depends = ["image:build"]
 run = "docker push rhyst/caldav-companion:latest"
